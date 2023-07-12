@@ -1,0 +1,28 @@
+{% extends 'listings/base.html' %}
+{% load static %}
+{% block head %}
+        <meta charset="UTF-8">
+        <title>Connexion - LITReview.com</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'listings/big-logo.css' %}" />
+            <link rel="stylesheet" type="text/css" href="{% static 'listings/connection.css' %}" />
+{% endblock %}
+{% block content %}
+        <div class="big-logo"></div>
+        <div class="rectangle-connection">
+            <div>
+                <h1>Se connecter à LITReview</h1>
+            </div>
+            <div class="rectangle-email">
+                <input id="email" type="text" data-test-email="email" placeholder="Adresse e-mail" autofocus="1" aria-label="Adresse e-mail">
+            </div>
+            <div class="rectangle-password">
+                <input id="password" type="password" data-test-pass="password" placeholder="Mot de passe" aria-label="Mot de passe">
+            </div>
+
+            <div>
+                <button id="connect-button">Se connecter</button>
+                <a href="http://127.0.0.1:8000/forgot/" id="forgot-password-button">Mot de passe oublié</a>
+                <a href="http://127.0.0.1:8000/registration/" id="create-account-button">Créer un compte</a>
+            </div>
+        </div>
+{% endblock %}

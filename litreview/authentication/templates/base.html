@@ -1,0 +1,15 @@
+<!-- base.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+    <head>
+        {% block head %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{% static 'listings/wall-paper.css' %}" />
+        <link rel="icon" type="image/x-icon" href="{% static 'listings/backgrounds/favicon.ico' %}" />
+    </head>
+    <body id="wall-paper">
+        {% block content %}{% endblock %}
+    </body>
+</html>
+
+
