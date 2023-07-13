@@ -1,0 +1,9 @@
+.big-logo{
+    width: 204px;
+    height: 247px;
+    display: block;
+    margin: auto;
+    background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url(backgrounds/Logo.png);
+}

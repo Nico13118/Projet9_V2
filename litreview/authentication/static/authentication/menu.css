@@ -1,0 +1,67 @@
+.menu{
+    display: flex;
+    flex-direction: row;
+
+}
+a.flow-button,
+a.subscription-button,
+a.posts-button{
+    width: 150px;
+    height: 40px;
+    margin: auto;
+    font-size: 20px;
+    color: #FFFFFF;
+    border: 2px solid #E8E6E3;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1C1E20;
+    text-decoration: none;
+}
+button.sign-out-button{
+    width: 150px;
+    height: 40px;
+    margin: auto;
+    font-size: 18px;
+    color: #FFFFFF;
+    border: 2px solid #E8E6E3;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1C1E20;
+    text-decoration: none;
+}
+
+a.flow-button:hover,
+a.subscription-button:hover,
+a.posts-button:hover,
+button.sign-out-button:hover{
+    color: #61C64D;
+    border: 2px solid #61C64D;
+
+}
+
+
+.picture1,
+.picture2{
+    width: 380px;
+    height: 111px;
+    display: flex;
+    margin: auto;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(backgrounds/Image_Livres2.png);
+}
+
+.small_logo{
+    width: 100px;
+    height: 120px;
+    margin: auto;
+    background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url(backgrounds/Logo.png);
+
+}
