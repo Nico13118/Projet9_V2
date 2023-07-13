@@ -4,11 +4,15 @@
 <html lang="fr">
     <head>
         {% block head %}{% endblock %}
-        <link rel="stylesheet" type="text/css" href="{% static 'listings/wall-paper.css' %}" />
-        <link rel="icon" type="image/x-icon" href="{% static 'listings/backgrounds/favicon.ico' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/wall-paper.css' %}" />
+        <link rel="icon" type="image/x-icon" href="{% static 'authentication/backgrounds/favicon.ico' %}" />
     </head>
     <body id="wall-paper">
         {% block content %}{% endblock %}
+    {% if user.is_authenticated %}
+        <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout'%}">Se déconnecter</a></p>
+    {% endif %}
+
     </body>
 </html>
 
