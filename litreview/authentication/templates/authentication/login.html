@@ -1,11 +1,24 @@
 <!-- login.html -->
 <!-- authentication/templates/authentication/login.html  -->
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+        <meta charset="UTF-8">
+        <title>Connexion - LITReview.com</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/big-logo.css' %}" />
+            <link rel="stylesheet" type="text/css" href="{% static 'authentication/login.css' %}" />
+{% endblock %}
 {% block content %}
-    <p>{{ message }}</p>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Se connecter</button>
-    </form>
+        <div class="big-logo"></div>
+            <form method="post">
+                <div class="rectangle-connection">
+                    <h1>Se connecter à LITReview</h1>
+                    <p class="error-message">{{ message }}</p>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="login-button" type="submit" value="Se connecter">
+                    <a href="http://127.0.0.1:8000/forgot/" id="forgot-password-button">Mot de passe oublié</a>
+                    <a href="http://127.0.0.1:8000/registration/" id="create-account-button">Créer un compte</a>
+                </div>
+            </form>
 {% endblock content %}
