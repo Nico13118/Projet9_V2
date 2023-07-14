@@ -12,3 +12,5 @@ class User(AbstractUser):
         return self.username
 
 
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
