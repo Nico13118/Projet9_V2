@@ -2,11 +2,9 @@ a.no-underline{
     text-decoration: none;
 }
 
+/*balise input*/
 .registration-button,
-.cancel-button,
-.login-button,
-.create-account-button,
-.forgot-password-button{
+.login-button{
     width: 300px;
     height: 60px;
     margin-bottom: 30px;
@@ -21,6 +19,26 @@ a.no-underline{
     justify-content: center;
     align-items: center;
 }
+
+/* balise a href*/
+.cancel-button,
+.create-account-button,
+.forgot-password-button{
+    width: 300px;
+    height: 60px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #1C1E20;
+    font-size: 23px;
+    color: #FFFFFF;
+    border: 2px solid #E8E6E3;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .registration-button:hover,
 .cancel-button:hover,
 .login-button:hover,
