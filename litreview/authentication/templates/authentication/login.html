@@ -6,7 +6,8 @@
         <meta charset="UTF-8">
         <title>Connexion - LITReview.com</title>
         <link rel="stylesheet" type="text/css" href="{% static 'authentication/big-logo.css' %}" />
-            <link rel="stylesheet" type="text/css" href="{% static 'authentication/login.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/login.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/button1.css' %}" />
 {% endblock %}
 {% block content %}
         <div class="big-logo"></div>
@@ -17,8 +18,8 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <input class="login-button" type="submit" value="Se connecter">
-                    <a href="http://127.0.0.1:8000/forgot/" id="forgot-password-button">Mot de passe oublié</a>
-                    <a href="{% url 'signup' %}" id="create-account-button">Créer un compte</a>
+                    <a href="http://127.0.0.1:8000/forgot/" class="forgot-password-button no-underline">Mot de passe oublié</a>
+                    <a href="{% url 'signup' %}" class="create-account-button no-underline">Créer un compte</a>
                 </div>
             </form>
 {% endblock content %}
