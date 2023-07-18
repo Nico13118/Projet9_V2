@@ -1,7 +1,7 @@
 /**/
 .rectangle-registration{
     width: 630px;
-    height: 530px;
+    height: 670px;
     display: block;
     margin: auto;
     background-color: #1C1E20;
@@ -40,6 +40,5 @@ h1{
     margin: 0px;
     font-size: 20px;
     color: #ff0000;
-    text-align: center;
 
 }
