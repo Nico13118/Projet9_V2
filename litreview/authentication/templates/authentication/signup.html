@@ -17,8 +17,5 @@
                     <input class="registration-button" type="submit" value="S'inscrire">
                     <a href="{% url 'login' %}" class="cancel-button no-underline">Annuler</a>
                 </div>
-                {% if form.errors %}
-                {{ form.errors }}
-                {% endif %}
             </form>
-{% endblock content %}
+{% endblock %}
