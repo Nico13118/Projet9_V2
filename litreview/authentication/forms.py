@@ -10,21 +10,19 @@ class SignupForm(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirmer le mot de passe'}))
 
-    def clean_letter_password1(self):
-        password1 = self.cleaned_data.get('password1')
-        validator = ContainsLetterValidator()
-        validator.validate(password1)
-
-    def clean_number_password1(self):
-        password1 = self.cleaned_data.get('password1')
-        validator = ContainsNumberValidator()
-        validator.validate(password1)
-
     def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-        validador1 = Password1Password2()
-        validador1.validate(password1, password2)
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+
+        validator1 = ContainsLetterValidator()
+        validator1.validate(password1)
+
+        validator2 = ContainsNumberValidator()
+        validator2.validate(password2)
+
+        validator3 = Password1Password2()
+        validator3.validate(password1, password2)
 
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
