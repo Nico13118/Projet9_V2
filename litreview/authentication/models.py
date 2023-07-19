@@ -7,6 +7,7 @@ class User(AbstractUser):
         'unique': "Ce nom d'utilisateur est déjà utilisé"})
     email = models.EmailField(max_length=100, unique=True, error_messages={
         'unique': "Cet email existe déjà dans notre base de données"})
+    password = models.CharField(blank=False, max_length=150)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
