@@ -1,0 +1,26 @@
+.rectangle-success{
+    width: 630px;
+    height: 530px;
+    display: block;
+    margin: auto;
+    background-color: #1C1E20;
+
+}
+
+h1{
+    padding-top: 20px;
+    font-size: 30px;
+    text-align:center;
+    color: #FFFFFF;
+
+}
+
+
+.message{
+    padding-top: 20px;
+    font-size: 40px;
+    text-align:center;
+    color: #FFFFFF;
+
+
+}
