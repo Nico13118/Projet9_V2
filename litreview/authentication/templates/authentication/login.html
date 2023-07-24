@@ -1,5 +1,4 @@
 <!-- login.html -->
-<!-- authentication/templates/authentication/login.html  -->
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
@@ -11,15 +10,14 @@
 {% endblock %}
 {% block content %}
         <div class="big-logo"></div>
-            <form method="post">
+            <form method="post">{% csrf_token %}
                 <div class="rectangle-connection">
                     <h1>Se connecter à LITReview</h1>
                     <p class="error-message">{{ message }}</p>
-                    {% csrf_token %}
                     {{ form.as_p }}
-                    <input class="login-button" type="submit" value="Se connecter">
-                    <a href="http://127.0.0.1:8000/forgot/" class="forgot-password-button no-underline">Mot de passe oublié</a>
-                    <a href="{% url 'signup' %}" class="create-account-button no-underline">Créer un compte</a>
+                    <input class="input_button" type="submit" value="Se connecter">
+                    <a href="{% url 'password_reset_form' %}" class="href_button no-underline">Mot de passe oublié</a>
+                    <a href="{% url 'signup' %}" class="href_button no-underline">Créer un compte</a>
                 </div>
             </form>
 {% endblock %}
