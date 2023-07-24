@@ -9,13 +9,13 @@
 {% endblock %}
 {% block content %}
         <div class="big-logo"></div>
-            <form method="post">
+            <form method="post">{% csrf_token %}
                 <div class="rectangle-registration">
                     <h1>S'inscrire à LITReview</h1>
-                    {% csrf_token %}
+
                     {{ form.as_p }}
-                    <input class="registration-button" type="submit" value="S'inscrire">
-                    <a href="{% url 'login' %}" class="cancel-button no-underline">Annuler</a>
+                    <input class="input_button" type="submit" value="S'inscrire">
+                    <a href="{% url 'login' %}" class="href_button no-underline">Annuler</a>
                 </div>
             </form>
 {% endblock %}
