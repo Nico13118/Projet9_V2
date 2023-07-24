@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from authentication.validators import ContainsLetterValidator, ContainsNumberValidator, Password1Password2
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -142,3 +142,12 @@ AUTH_USER_MODEL = 'authentication.User'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'success'
+DEFAULT_FROM_EMAIL = 'quadratusnicolastest@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'quadratusnicolastest@gmail.com'
+EMAIL_HOST_PASSWORD = 'bubtatsslwdowela'
+
+PASSWORD_RESET_TIMEOUT_MINUTES = 10
