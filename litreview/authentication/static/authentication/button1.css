@@ -1,10 +1,9 @@
-a.no-underline{
+.no-underline{
     text-decoration: none;
 }
 
 /*balise input*/
-.registration-button,
-.login-button{
+.input_button{
     width: 300px;
     height: 60px;
     margin-bottom: 30px;
@@ -21,9 +20,7 @@ a.no-underline{
 }
 
 /* balise a href*/
-.cancel-button,
-.create-account-button,
-.forgot-password-button{
+.href_button{
     width: 300px;
     height: 60px;
     margin-bottom: 30px;
@@ -39,11 +36,8 @@ a.no-underline{
     align-items: center;
 }
 
-.registration-button:hover,
-.cancel-button:hover,
-.login-button:hover,
-.create-account-button:hover,
-.forgot-password-button:hover{
+.input_button:hover,
+.href_button:hover{
     color: #61C64D;
     border: 2px solid #61C64D;
 }
