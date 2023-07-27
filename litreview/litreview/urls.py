@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.contrib.auth import views as auth_views
 import authentication.views
 import blog.views
 
@@ -25,6 +24,7 @@ urlpatterns = [
     path("login/", authentication.views.LoginPageView.as_view(), name='login'),
     path('logout/', authentication.views.logout_user, name='logout'),
     path('home/', blog.views.home, name='home'),
+    path('flow/', blog.views.flow, name='flow'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('success/', authentication.views.registration_success, name='success'),
     path('password_reset_form/', authentication.views.CustomPasswordResetView.as_view(), name='password_reset_form'),
