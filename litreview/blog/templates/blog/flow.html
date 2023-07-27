@@ -1,0 +1,33 @@
+<!-- flow.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+        <meta charset="UTF-8">
+        <title>Flux - LITReview.com</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/menu.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/flow.css' %}"/>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <form method="post">{% csrf_token %}
+        <nav class="menu">
+                <a class="href_button" href="http://127.0.0.1:8000/flow/">Flux</a>
+                <div class="picture1"></div>
+                <a class="href_button" href="http://127.0.0.1:8000/posts/">Posts</a>
+                <div class="small_logo"></div>
+                <a class="href_button" href="http://127.0.0.1:8000/subscription/">Abonnements</a>
+                <div class="picture2"></div>
+                <a class="href_button" href="{% url 'logout'%}">Se déconnecter</a>
+        </nav>
+        <div class="pseudo">
+            <p>{{ request.user }}</p>
+        </div>
+        <nav class="critical_button">
+            <a class="request_button" href="">Demander une critique</a>
+            <a class="create_button" href="">Créer une critique</a>
+
+        </nav>
+    </form>
+    {% endif %}
+{% endblock %}
+
