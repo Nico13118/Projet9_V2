@@ -1,0 +1,31 @@
+.critical_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.request_button,
+.create_button{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 40px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #FFFFFF;
+    border: 2px solid #E8E6E3;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    background: #1C1E20;
+    text-decoration: none;
+}
+
+.request_button:hover,
+.create_button:hover{
+    color: #61C64D;
+    border: 2px solid #61C64D;
+}
