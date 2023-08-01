@@ -1,3 +1,13 @@
+fieldset{
+    width: 1000px;
+    height: 620px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    border: 2px solid #1C1E20;
+
+}
+
 .critical_button{
     display: flex;
     justify-content: center;
@@ -28,4 +38,15 @@
 .create_button:hover{
     color: #61C64D;
     border: 2px solid #61C64D;
+}
+
+h2{
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
