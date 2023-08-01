@@ -151,3 +151,7 @@ EMAIL_HOST_USER = 'quadratusnicolastest@gmail.com'
 EMAIL_HOST_PASSWORD = 'bubtatsslwdowela'
 
 PASSWORD_RESET_TIMEOUT_MINUTES = 10
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.joinpath('media/')
+
