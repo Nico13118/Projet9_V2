@@ -11,7 +11,7 @@
     {% if user.is_authenticated %}
     <form method="post">{% csrf_token %}
         <nav class="menu">
-                <a class="href_button" href="http://127.0.0.1:8000/flow/">Flux</a>
+                <a class="href_button" href="% url 'flow'%">Flux</a>
                 <div class="picture1"></div>
                 <a class="href_button" href="http://127.0.0.1:8000/posts/">Posts</a>
                 <div class="small_logo"></div>
@@ -23,10 +23,20 @@
             <p>{{ request.user }}</p>
         </div>
         <nav class="critical_button">
-            <a class="request_button" href="">Demander une critique</a>
+            <a class="request_button" href="{% url 'request_review'%}">Demander une critique</a>
             <a class="create_button" href="">Créer une critique</a>
 
         </nav>
+        <fieldset>
+            {% for blog in blogs %}
+            <h2>{{ blog.title }}</h2>
+            <p class="author_date">{{ blog.author.username }} a demandé une critique le {{ blog.date_created }}</p>
+            <p>{{ blog.content }}</p>
+            {% endfor %}
+            {% for photo in photos %}
+            <img src="{{ photo.image.url }}">
+            {% endfor %}
+        </fieldset>
     </form>
     {% endif %}
 {% endblock %}
