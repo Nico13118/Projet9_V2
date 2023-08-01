@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 import authentication.views
 import blog.views
 
@@ -25,6 +27,7 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('home/', blog.views.home, name='home'),
     path('flow/', blog.views.flow, name='flow'),
+    path('request_review/', blog.views.request_review, name='request_review'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('success/', authentication.views.registration_success, name='success'),
     path('password_reset_form/', authentication.views.CustomPasswordResetView.as_view(), name='password_reset_form'),
@@ -36,3 +39,6 @@ urlpatterns = [
 
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
