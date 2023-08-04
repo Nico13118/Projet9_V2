@@ -23,18 +23,19 @@
             <p>{{ request.user }}</p>
         </div>
         <nav class="critical_button">
-            <a class="request_button" href="{% url 'request_review'%}">Demander une critique</a>
+            <a class="request_button" href="{% url 'create_ticket' %}">Demander une critique</a>
             <a class="create_button" href="">Créer une critique</a>
 
         </nav>
         <fieldset>
-            {% for blog in blogs %}
-            <h2>{{ blog.title }}</h2>
-            <p class="author_date">{{ blog.author.username }} a demandé une critique le {{ blog.date_created }}</p>
-            <p>{{ blog.content }}</p>
-            {% endfor %}
-            {% for photo in photos %}
-            <img src="{{ photo.image.url }}">
+            {% for ticket, photo in tickets_photos %}
+            <div class="rectangle">
+                <h2>{{ ticket.title }}</h2>
+                <p class="user_date">{{ ticket.user.username }} a demandé une critique le {{ ticket.date_created }}</p>
+                <p>{{ ticket.description }}</p>
+                <img alt="{{ ticket.title }}" src="{{ photo.image.url }}">
+                <a class="create_button2" href="">Créer une critique</a>
+            </div>
             {% endfor %}
         </fieldset>
     </form>
