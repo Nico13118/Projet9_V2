@@ -1,0 +1,26 @@
+<!-- base2.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+    <head>
+        {% block head %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/wall-paper.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/menu.css' %}"/>
+        <link rel="icon" type="image/x-icon" href="{% static 'authentication/backgrounds/favicon.ico' %}"/>
+    </head>
+    <body id="wall-paper">
+        <nav class="menu">
+                <a class="href_button" href="http://127.0.0.1:8000/flow/">Flux</a>
+                <div class="picture1"></div>
+                <a class="href_button" href="http://127.0.0.1:8000/posts/">Posts</a>
+                <div class="small_logo"></div>
+                <a class="href_button" href="http://127.0.0.1:8000/subscription/">Abonnements</a>
+                <div class="picture2"></div>
+                <a class="href_button" href="{% url 'logout'%}">Se déconnecter</a>
+        </nav>
+        <div class="pseudo">
+            <p>{{ request.user }}</p>
+        </div>
+        {% block content %}{% endblock %}
+    </body>
+</html>
