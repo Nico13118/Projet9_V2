@@ -1,0 +1,62 @@
+<!-- review_not_in_response.html -->
+{% extends 'base2.html' %}
+{% load static %}
+{% block head %}
+        <meta charset="UTF-8">
+        <title>Créer une critique - LITReview.com</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/review_not_in_response.css' %}"/>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <h1>Créer une critique</h1>
+        <div class="rectangle1">
+
+            <p>
+                <label for="id_title">Titre :</label>
+                <input type="text" name="title" maxlength="128" required id="id_title">
+            </p>
+            <p>
+                <label for="id_description">Description :</label>
+                <textarea name="description" maxlength="5000" required id="id_description" rows="4" cols="50"></textarea>
+            </p>
+            <p>
+
+                <label for="id_image">Image :</label>
+                <input type="file" name="image" accept="image/*" required id="id_image">
+            </p>
+        </div>
+
+        <div class="rectangle2">
+            <h2>Critique</h2>
+            <p>
+                <label for="id_headline">Titre :</label>
+            </p>
+            <div>
+                <input type="text" name="headline" required id="id_headline">
+            </div>
+            <label class="rating">Note :</label>
+            <div class="checkbox">
+                <input type="checkbox" id="id_checkbox0" name="rating" value="0"/>
+                <label for="id_checkbox0">-0</label>
+                <input type="checkbox" id="id_checkbox1" name="rating" value="1"/>
+                <label for="id_checkbox1">-1</label>
+                <input type="checkbox" id="id_checkbox2" name="rating" value="2"/>
+                <label for="id_checkbox2">-2</label>
+                <input type="checkbox" id="id_checkbox3" name="rating" value="3"/>
+                <label for="id_checkbox3">-3</label>
+                <input type="checkbox" id="id_checkbox4" name="rating" value="4"/>
+                <label for="id_checkbox4">-4</label>
+                <input type="checkbox" id="id_checkbox5" name="rating" value="5"/>
+                <label for="id_checkbox5">-5</label>
+            </div>
+            <p>
+                <label for="id_body">Commentaire :</label>
+                <textarea name="body" maxlength="5000" required id="id_body" rows="4" cols="50"></textarea>
+            </p>
+            <button type="submit">Envoyer</button>
+        </div>
+
+    </form>
+    {% endif %}
+{% endblock %}
