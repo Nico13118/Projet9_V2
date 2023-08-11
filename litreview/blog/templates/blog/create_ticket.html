@@ -1,4 +1,4 @@
-<!-- request_review.html -->
+<!-- create_ticket.html -->
 {% extends 'base2.html' %}
 {% load static %}
 {% block head %}
@@ -9,8 +9,8 @@
 {% block content %}
     {% if user.is_authenticated %}
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <h2>Créer un ticket</h2>
         <fieldset>
-            <h2>Créer un ticket</h2>
             <p>
                 <label for="id_title">Titre :</label>
                 <input type="text" name="title" maxlength="128" required id="id_title">
@@ -24,7 +24,6 @@
                 <label for="id_image">Image :</label>
                 <input type="file" name="image" accept="image/*" required id="id_image">
             </p>
-                <img id="image-preview" src="#" alt="Aperçu de l'image" style="display: none;">
                 <button type="submit">Envoyer</button>
         </fieldset>
     </form>
