@@ -27,7 +27,10 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('home/', blog.views.home, name='home'),
     path('flow/', blog.views.flow, name='flow'),
-    path('create_review_not_in_response/', blog.views.create_review, name='create_review_not_in_response'),
+    path('review_in_response/<int:ticket_id>', blog.views.review_in_response, name='review_in_response'),
+    path('review_not_in_response/', blog.views.review_not_in_response,
+         name='review_not_in_response'),
+
     path('create_ticket/', blog.views.create_ticket, name='create_ticket'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('success/', authentication.views.registration_success, name='success'),
