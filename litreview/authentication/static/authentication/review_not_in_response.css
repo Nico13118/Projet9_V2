@@ -1,0 +1,137 @@
+.rectangle1{
+    width: 1000px;
+    height: 400px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    border: 2px solid #1C1E20;
+
+}
+
+#id_title,
+#id_headline{
+    width: 500px;
+    height: 20px;
+}
+
+#id_description,
+#id_body{
+    width: 95%;
+    height: 150px;
+}
+
+
+#id_title,
+#id_description,
+#id_headline,
+#id_body{
+    padding: 12px 12px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#id_image{
+    width: 500px;
+    height: 25px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: justify;
+    text-transform: none;
+    vertical-align: top !important;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.rectangle2{
+    width: 1000px;
+    height: 620px;
+    display: block;
+    margin: auto;
+    margin-top: -2px;
+    border: 2px solid #1C1E20;
+
+}
+
+
+p{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+
+}
+
+h1{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+
+}
+
+h2{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+}
+
+
+
+h3{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+}
+
+#id_headline{
+    width: 500px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.checkbox{
+    margin-left: 10px;
+
+
+}
+
+.rating{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+button{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 40px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #FFFFFF;
+    border: 2px solid #E8E6E3;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    background: #1C1E20;
+    text-decoration: none;
+}
+
+
+button:hover{
+    color: #61C64D;
+    border: 2px solid #61C64D;
+}
