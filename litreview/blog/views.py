@@ -17,8 +17,10 @@ def flow(request):
     tickets = models.Ticket.objects.all()
     reviews = models.Review.objects.all()
 
+    reviews = reviews.order_by('id')
+
     tickets_photos = zip(tickets, photos)
-    tickets_reviews = zip(tickets, reviews)
+    tickets_reviews = reviews
     return render(request, 'blog/flow.html', context={'tickets_photos': tickets_photos,
                                                       'tickets_reviews': tickets_reviews})
 
@@ -85,30 +87,24 @@ def review_not_in_response(request):
 @login_required
 def review_in_response(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    edit_form = forms.TicketForm(instance=ticket)
-    review_form = forms.ReviewResponseForm()
+    review_form = forms.ReviewForm()
     if request.method == 'POST':
-        if 'review_in_response' in request.POST:
-            edit_form = forms.TicketForm(request.POST, instance=ticket)
-            review_form = forms.ReviewResponseForm(request.POST)
-            if all([edit_form.is_valid(), review_form.is_valid()]):
-                ticket = edit_form.save(commit=False)
-                ticket.save()
-                review = review_form.save(commit=False)
-                review.user = request.user
-                review.ticket = ticket
-                selected_rating = request.POST.getlist('rating')
-                if selected_rating:
-                    review.rating = int(selected_rating[0])
-                    review.save()
-                    return redirect('flow')
-                else:
-                    review.rating = 0
-                    review.save()
-                    return redirect('flow')
+        review_form = forms.ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            selected_rating = request.POST.getlist('rating')
+            if selected_rating:
+                review.rating = int(selected_rating[0])
+                review.save()
+                return redirect('flow')
+            else:
+                review.rating = 0
+                review.save()
+                return redirect('flow')
     context3 = {
         'review_form': review_form,
-        'edit_form': edit_form,
         'ticket': ticket,
     }
     return render(request, 'blog/review_in_response.html', context=context3)
