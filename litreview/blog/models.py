@@ -18,12 +18,13 @@ class Ticket(models.Model):
     description = models.TextField(max_length=8192, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
+    response = models.CharField(max_length=1, default='0')
 
 
-# Créer une critique (Pas en réponse à un ticket)
+# Créer une critique (En réponse ou Pas en réponse à un ticket)
 class Review(models.Model):
     objects = models.Manager()
-    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
+    ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE, null=True, blank=True)
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)])
     headline = models.CharField(max_length=128)
@@ -32,13 +33,10 @@ class Review(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-# Créer une critique (en réponse à un ticket)
-class ReviewResponse(models.Model):
-    objects = models.Manager()
-    rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)])
-    headline = models.CharField(max_length=128)
-    body = models.TextField(max_length=8192, blank=True)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_now_add=True)
 
+#
+# class UserFollows(models.Model):
+#     pass
+#
+#     class Meta:
+#         unique_together = ('user', 'followed_user')
