@@ -13,11 +13,9 @@ def home(request):
 
 @login_required
 def flow(request):
-    photos = models.Photo.objects.all()
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
-
-    reviews = reviews.order_by('id')
+    photos = models.Photo.objects.all().order_by('-date_created')
+    tickets = models.Ticket.objects.all().order_by('-date_created')
+    reviews = models.Review.objects.all().order_by('-date_created')
 
     tickets_photos = zip(tickets, photos)
     tickets_reviews = reviews
@@ -64,9 +62,11 @@ def review_not_in_response(request):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.photo = photo
+            ticket.response = 2
             ticket.save()
             review = review_form.save(commit=False)
             review.user = request.user
+            review.ticket_id = ticket.id
             selected_rating = request.POST.getlist('rating')
             if selected_rating:
                 review.rating = int(selected_rating[0])
@@ -87,9 +87,13 @@ def review_not_in_response(request):
 @login_required
 def review_in_response(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    edit_ticket_form = forms.TicketForm(instance=ticket)
     review_form = forms.ReviewForm()
     if request.method == 'POST':
+        edit_ticket_form = forms.TicketForm(request.POST, instance=ticket)
         review_form = forms.ReviewForm(request.POST)
+        ticket.response = 1
+        edit_ticket_form.save()
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.user = request.user
@@ -106,6 +110,7 @@ def review_in_response(request, ticket_id):
     context3 = {
         'review_form': review_form,
         'ticket': ticket,
+        'edit_ticket_form': edit_ticket_form,
     }
     return render(request, 'blog/review_in_response.html', context=context3)
 
