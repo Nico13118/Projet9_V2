@@ -15,31 +15,38 @@
         </nav>
         <fieldset>
             {% for ticket, photo in tickets_photos %}
-
-            <div class="rectangle1">
+            {% if ticket.response == '0' %}
+            <div class="rectangle4">
                 <p class="user_date">{{ ticket.user.username }} a demandé une critique le {{ ticket.date_created }}</p>
                 <h2>{{ ticket.title }}</h2>
                 <p>{{ ticket.description }}</p>
-                <p>{{ ticket.id }}</p>
+                <p>{{ ticket.response }}</p>
                 <img alt="{{ ticket.title }}" src="{{ photo.image.url }}">
                 <a class="create_button2" href="{% url 'review_in_response' ticket.id %}">Créer une critique</a>
             </div>
+            {% endif %}
 
-
+            {% if ticket.response == '1' %}
+            <div class="rectangle4">
+                <p class="user_date">{{ ticket.user.username }} a demandé une critique le {{ ticket.date_created }}</p>
+                <h2>{{ ticket.title }}</h2>
+                <p>{{ ticket.description }}</p>
+                <p>{{ ticket.response }}</p>
+                <img alt="{{ ticket.title }}" src="{{ photo.image.url }}">
+            </div>
+            {% endif %}
             {% for review in tickets_reviews %}
             {% if review.ticket_id == ticket.id %}
-            <div class="rectangle2">
+            <div class="rectangle1">
                 <p class="user_date">{{ review.user.username }} à publié une critique le {{ review.date_created }}</p>
                 <h2>{{ review.headline }}</h2>
                 <p>{{ review.body }}</p>
 
-                <div class="rectangle3">
-                    <p class="user_date">{{ ticket.user.username }} a demandé une critique le {{ ticket.date_created }}</p>
+                <div class="rectangle2">
+                    <p class="user_date">Ticket - {{ ticket.user.username }}</p>
                     <h2>{{ ticket.title }}</h2>
                     <p>{{ ticket.description }}</p>
-                    <p>{{ ticket.id }}</p>
                     <img alt="{{ ticket.title }}" src="{{ photo.image.url }}">
-
                 </div>
             </div>
             {% endif %}
@@ -49,4 +56,3 @@
     </form>
     {% endif %}
 {% endblock %}
-
