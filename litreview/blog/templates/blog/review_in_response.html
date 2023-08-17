@@ -11,13 +11,20 @@
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
         <h1>Créer une critique</h1>
         <div class="rectangle1">
-            <p>Vous en train de poster en réponse à : {{ ticket.user.username }} </p>
+            <p>Vous êtes en train de poster en réponse à : {{ ticket.user.username }} </p>
             <div class="rectangle2">
-
                 <p class="user_date">{{ ticket.user.username }} a demandé une critique le {{ ticket.date_created }}</p>
+                <p>
+                    <input type="hidden" name="title" value="{{ ticket.title }}">
+                </p>
                 <h2>{{ ticket.title }}</h2>
                 <p>{{ ticket.description }}</p>
-                <img src="{{ ticket.photo.image.url }}">
+                <p>
+                    <input type="hidden" name="description" value="{{ ticket.description }}">
+                </p>
+                <img alt="{{ ticket.title }}" src="{{ ticket.photo.image.url }}">
+
+
             </div>
         </div>
         <div class="rectangle3">
