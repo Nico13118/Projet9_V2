@@ -30,6 +30,8 @@ urlpatterns = [
     path('review_in_response/<int:ticket_id>', blog.views.review_in_response, name='review_in_response'),
     path('review_not_in_response/', blog.views.review_not_in_response,
          name='review_not_in_response'),
+    path('posts/', blog.views.posts, name='posts'),
+    path('subscriptions/', blog.views.follow_users, name='subscriptions'),
 
     path('create_ticket/', blog.views.create_ticket, name='create_ticket'),
     path('signup/', authentication.views.signup_page, name='signup'),
