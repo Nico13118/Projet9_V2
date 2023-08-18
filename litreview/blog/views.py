@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . import forms, models
 from django.contrib.auth.decorators import login_required
+from django.db.models import CharField, Value
+from itertools import chain
 
 
 @login_required
@@ -21,6 +23,20 @@ def flow(request):
     tickets_reviews = reviews
     return render(request, 'blog/flow.html', context={'tickets_photos': tickets_photos,
                                                       'tickets_reviews': tickets_reviews})
+
+
+@login_required
+def posts(request):
+    reviews = get_users_viewable_reviews(request.user)
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+    tickets = get_users_viewable_reviews(request.user)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+
+    posts = sorted(chain(reviews, tickets), key=lambda post: post.date_created, reverse=True)
+
+    return render(request, 'blog/posts.html', context={'posts': posts})
+
 
 
 @login_required
@@ -113,4 +129,18 @@ def review_in_response(request, ticket_id):
         'edit_ticket_form': edit_ticket_form,
     }
     return render(request, 'blog/review_in_response.html', context=context3)
+
+
+@login_required
+def follow_users(request):
+    form = forms.FollowUsersForm(instance=request.user)
+    form.fields['follows'].queryset = form.fields['follows'].queryset.exclude(
+        username=request.user.username)
+
+    if request.method == 'POST':
+        form = forms.FollowUsersForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('subscriptions')
+    return render(request, 'blog/subscriptions.html', context={'form': form})
 
