@@ -1,0 +1,17 @@
+<!-- subscriptions.html -->
+{% extends 'base2.html' %}
+{% load static %}
+{% block head %}
+        <meta charset="UTF-8">
+        <title>Abonnements - LITReview.com</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/subscriptions.css' %}"/>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2>Suivre d'autres utilisateurs</h2>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Confirmer</button>
+        </form>
+    {% endif %}
+{% endblock %}
