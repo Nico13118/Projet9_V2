@@ -1,5 +1,8 @@
 from django import forms
 from . import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class PhotoForm(forms.ModelForm):
@@ -26,6 +29,11 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = models.Review
-        fields = ['headline', 'rating', 'body']
+        fields = ['headline', 'rating', 'body', 'ticket']
 
 
+# litreview\blog\forms.py
+class FollowUsersForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['following']
