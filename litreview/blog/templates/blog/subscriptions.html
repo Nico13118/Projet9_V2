@@ -10,8 +10,18 @@
     {% if user.is_authenticated %}
         <h2>Suivre d'autres utilisateurs</h2>
         <form method="post">{% csrf_token %}
+            <h3>Liste des utilisateurs</h3>
             {{ form.as_p }}
             <button type="submit">Confirmer</button>
+            <h4>Mes abonnements</h4>
+            {% for following in my_following %}
+            {{ following }}
+            {% endfor %}
+            <h5>Mes abonnées</h5>
+            {% for followers in my_followers %}
+            {{ followers }}
+            {% endfor %}
+
         </form>
     {% endif %}
 {% endblock %}
