@@ -38,7 +38,6 @@ def posts(request):
     return render(request, 'blog/posts.html', context={'posts': posts})
 
 
-
 @login_required
 def create_ticket(request):
     ticket_form = forms.TicketForm()
@@ -133,14 +132,32 @@ def review_in_response(request, ticket_id):
 
 @login_required
 def follow_users(request):
+    # form permet d'afficher les utilisateurs se trouvant dans authentication_user
+    # et les affichent sous forme d'un formulaire
     form = forms.FollowUsersForm(instance=request.user)
-    form.fields['follows'].queryset = form.fields['follows'].queryset.exclude(
+
+    # followed_users affiche mes abonnements
+    my_following = request.user.following.all()
+
+    my_followers = request.user.follower.all()
+
+    # fonctionnalité qui permet d'exclure de la liste, l'utilisateur connecté
+    form.fields['following'].queryset = form.fields['following'].queryset.exclude(
         username=request.user.username)
+
+    # fonctionnalité qui permet de ne pas afficher dans la liste mes abonnements
+    form.fields['following'].queryset = form.fields['following'].queryset.exclude(
+        id__in=my_following)
 
     if request.method == 'POST':
         form = forms.FollowUsersForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            # following_user > Récupère l'utilisateur qui a été selectionné dans la liste
+            following_user = form.cleaned_data.get('following')
+            user.save()
+            user.following.add(*following_user)
             return redirect('subscriptions')
-    return render(request, 'blog/subscriptions.html', context={'form': form})
-
+    return render(request, 'blog/subscriptions.html', context={'form': form,
+                                                               'my_following': my_following,
+                                                               'my_followers': my_followers})
