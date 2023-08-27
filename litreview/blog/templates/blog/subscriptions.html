@@ -8,11 +8,10 @@
 {% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
-        <h2>Suivre d'autres utilisateurs</h2>
+        <h1>Suivre d'autres utilisateurs</h1>
 
         <form method="post">{% csrf_token %}
-            <h3>Liste des utilisateurs</h3>
-            <label for="{{ form.following.id_for_label }}"></label>
+            <label for="{{ form.following.id_for_label }}">user_list</label>
             <select name="{{ form.following.name }}" id="{{ form.following.id_for_label }}" multiple>
                 {% for option in form.following.field.choices %}
                     <option value="{{ option.0 }}">{{ option.1 }}</option>
@@ -23,8 +22,8 @@
 
 
         <form method="post">{% csrf_token %}
-            <h4>Mes abonnements</h4>
-            <label for="{{ del_following.following_to_delete.id_for_label }}"></label>
+            <h2>Mes abonnements</h2>
+            <label for="{{ del_following.following_to_delete.id_for_label }}">following</label>
             <select name="{{ del_following.following_to_delete.name }}" id="{{ del_following.following_to_delete.id_for_label }}" multiple>
                 {% for option2 in del_following.following_to_delete.field.choices %}
                     <option value="{{ option2.0}}">{{ option2.1}}</option>
@@ -33,11 +32,12 @@
             <button type="submit" name="del_following">Désabonner</button>
         </form>
 
-        <h5>Mes abonnées</h5>
+        <h3>Mes abonnées</h3>
         {% for followers in my_followers %}
-        {{ followers }}
+        <div class="rectangle1">
+            {% csrf_token %}
+        <p id="followers">{{ followers }}</p>
+        </div>
         {% endfor %}
-
-
     {% endif %}
 {% endblock %}
