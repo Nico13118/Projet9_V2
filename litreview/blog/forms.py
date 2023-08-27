@@ -37,3 +37,14 @@ class FollowUsersForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['following']
+
+
+# litreview\blog\forms.py
+class DeleteFollowingForm(forms.Form):
+    following_to_delete = forms.ModelChoiceField(queryset=User.objects.none(), empty_label=None)
+
+    def __init__(self, *args, user=None):
+        super().__init__(*args)
+        if user is not None:
+            self.fields['following_to_delete'].queryset = user.following.all()
+
