@@ -130,34 +130,47 @@ def review_in_response(request, ticket_id):
     return render(request, 'blog/review_in_response.html', context=context3)
 
 
+# blog\views.py
 @login_required
 def follow_users(request):
-    # form permet d'afficher les utilisateurs se trouvant dans authentication_user
-    # et les affichent sous forme d'un formulaire
+    # form  = Récupère la liste des utilisateurs inscrits
     form = forms.FollowUsersForm(instance=request.user)
 
-    # followed_users affiche mes abonnements
+    # del_following = Récupère la liste de mes abonnements depuis la classe DeleteFollowingForm
+    del_following = forms.DeleteFollowingForm(user=request.user)
+
+    # my_following = Récupère la liste de mes abonnements
     my_following = request.user.following.all()
 
+    # my_followers = Récupère la liste des personnes qui me suivent
     my_followers = request.user.follower.all()
 
     # fonctionnalité qui permet d'exclure de la liste, l'utilisateur connecté
     form.fields['following'].queryset = form.fields['following'].queryset.exclude(
         username=request.user.username)
 
-    # fonctionnalité qui permet de ne pas afficher dans la liste mes abonnements
+    # fonctionnalité qui permet de ne pas afficher dans la 'Liste des utilisateurs' mes abonnements
     form.fields['following'].queryset = form.fields['following'].queryset.exclude(
         id__in=my_following)
 
     if request.method == 'POST':
-        form = forms.FollowUsersForm(request.POST, instance=request.user)
-        if form.is_valid():
-            user = form.save(commit=False)
-            # following_user > Récupère l'utilisateur qui a été selectionné dans la liste
-            following_user = form.cleaned_data.get('following')
-            user.save()
-            user.following.add(*following_user)
-            return redirect('subscriptions')
+        if 'form' in request.POST:
+            form = forms.FollowUsersForm(request.POST, instance=request.user)
+            if form.is_valid():
+                user = form.save(commit=False)
+                # following_user > Récupère l'utilisateur qui a été selectionné dans la liste
+                following_user = form.cleaned_data.get('following')
+                user.save()
+                user.following.add(*following_user)
+                return redirect('subscriptions')
+
+        if 'del_following' in request.POST:
+            del_following = forms.DeleteFollowingForm(request.POST, user=request.user)
+            if del_following.is_valid():
+                following_to_delete = del_following.cleaned_data['following_to_delete']
+                request.user.following.remove(following_to_delete)
+                return redirect('subscriptions')
+
     return render(request, 'blog/subscriptions.html', context={'form': form,
-                                                               'my_following': my_following,
-                                                               'my_followers': my_followers})
+                                                               'my_followers': my_followers,
+                                                               'del_following': del_following})
