@@ -31,12 +31,3 @@ class Review(models.Model):
     body = models.TextField(max_length=8192, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
-
-
-
-#
-# class UserFollows(models.Model):
-#     pass
-#
-#     class Meta:
-#         unique_together = ('user', 'followed_user')
