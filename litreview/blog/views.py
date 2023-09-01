@@ -15,14 +15,19 @@ def home(request):
 
 @login_required
 def flow(request):
-    photos = models.Photo.objects.all().order_by('-date_created')
-    tickets = models.Ticket.objects.all().order_by('-date_created')
-    reviews = models.Review.objects.all().order_by('-date_created')
+    tickets = models.Ticket.objects.all()
+    reviews = models.Review.objects.all()
+    my_following = request.user.following.all()
 
-    tickets_photos = zip(tickets, photos)
-    tickets_reviews = reviews
-    return render(request, 'blog/flow.html', context={'tickets_photos': tickets_photos,
-                                                      'tickets_reviews': tickets_reviews})
+    for ticket in tickets:
+        ticket.entry_type = "Ticket"
+
+    for review in reviews:
+        review.entry_type = "Review"
+
+    entries = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
+    return render(request, 'blog/flow.html', context={'entries': entries,
+                                                      "my_following": my_following})
 
 
 @login_required
