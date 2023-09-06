@@ -4,7 +4,8 @@ fieldset{
     border: 2px solid #1C1E20;
 }
 
-.rectangle4{
+.rectangle4,
+.rectangle5{
     width: 1000px;
     height: 620px;
     display: block;
