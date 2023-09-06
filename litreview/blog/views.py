@@ -18,29 +18,74 @@ def flow(request):
     tickets = models.Ticket.objects.all()
     reviews = models.Review.objects.all()
     my_following = request.user.following.all()
+    user_connected = str(request.user)
 
     for ticket in tickets:
-        ticket.entry_type = "Ticket"
 
-    for review in reviews:
-        review.entry_type = "Review"
+        if ticket.response == '0':
+            if ticket.user.username == user_connected:
+                ticket.entry_type = "Ticket_Not_Response"
+            if ticket.user.username != user_connected:
+                for follow in my_following:
+                    follow = str(follow)
+                    if ticket.user.username == follow:
+                        ticket.entry_type = "Ticket_Not_Response"
+        if ticket.response == '1':
+            if ticket.user.username == user_connected:
+                ticket.entry_type = "Ticket_Response"
+            for follow in my_following:
+                follow = str(follow)
+                if ticket.user.username == follow:
+                    ticket.content_type = "Ticket_Response"
+
+        if ticket.response == '1':
+            for review in reviews:
+                if review.ticket_id == ticket.id:
+                    if ticket.user.username == user_connected:
+                        review.entry_type = "Review"
+                        ticket.entry_type = "Ticket_Response"
+
+                    for follow in my_following:
+                        follow = str(follow)
+                        if ticket.user.username == follow:
+                            review.entry_type = "Review"
+                            ticket.entry_type = "Ticket_Response"
+
+                        if review.user.username == follow:
+                            review.entry_type = "Review"
+                            ticket.entry_type = "Ticket_Response"
 
     entries = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
-    return render(request, 'blog/flow.html', context={'entries': entries,
-                                                      "my_following": my_following})
+    return render(request, 'blog/flow.html', context={'entries': entries})
 
 
 @login_required
 def posts(request):
-    reviews = get_users_viewable_reviews(request.user)
-    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    tickets = models.Ticket.objects.all()
+    reviews = models.Review.objects.all()
+    user_connected = str(request.user)
 
-    tickets = get_users_viewable_reviews(request.user)
-    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    for ticket in tickets:
+        if ticket.response == '0':
+            if ticket.user.username == user_connected:
+                ticket.entry_type = "Ticket_Not_Response"
 
-    posts = sorted(chain(reviews, tickets), key=lambda post: post.date_created, reverse=True)
+        if ticket.response == '1':
+            if ticket.user.username == user_connected:
+                ticket.entry_type = "Ticket_Response"
 
-    return render(request, 'blog/posts.html', context={'posts': posts})
+        if ticket.response == '1':
+            for review in reviews:
+                if review.ticket_id == ticket.id:
+                    if ticket.user.username == user_connected:
+                        review.entry_type = "Review"
+                        ticket.entry_type = "Ticket_Response"
+                    if review.user.username == user_connected:
+                        review.entry_type = "Review"
+                        ticket.entry_type = "Ticket_Response"
+
+    entries = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
+    return render(request, 'blog/posts.html', context={'entries': entries})
 
 
 @login_required
@@ -82,7 +127,7 @@ def review_not_in_response(request):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.photo = photo
-            ticket.response = 2
+            ticket.response = 1
             ticket.save()
             review = review_form.save(commit=False)
             review.user = request.user
