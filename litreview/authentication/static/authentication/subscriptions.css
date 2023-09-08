@@ -74,3 +74,13 @@ button:hover{
     border: 2px solid #61C64D;
 
 }
+
+.href_button_subscriptions{
+    border: 2px solid #F00020 !important;
+
+}
+
+.href_button_subscriptions:hover{
+color: #61C64D !important;
+    border: 2px solid #61C64D !important;
+}
