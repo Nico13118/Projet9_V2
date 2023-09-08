@@ -20,7 +20,10 @@ p{
 
 }
 
-.href_button{
+.href_button_flow,
+.href_button_posts,
+.href_button_subscriptions,
+.href_button_logout{
     display: flex;
     flex-direction: column;
     width: 150px;
@@ -36,7 +39,10 @@ p{
     text-decoration: none;
 }
 
-.href_button:hover{
+.href_button_flow:hover,
+.href_button_posts:hover,
+.href_button_subscriptions:hover,
+.href_button_logout:hover{
     color: #61C64D;
     border: 2px solid #61C64D;
 
