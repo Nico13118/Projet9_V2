@@ -10,13 +10,13 @@
     </head>
     <body id="wall-paper">
         <nav class="menu">
-                <a class="href_button" href="{% url 'flow'%}">Flux</a>
+                <a class="href_button_flow" href="{% url 'flow'%}">Flux</a>
                 <div class="picture1"></div>
-                <a class="href_button" href="{% url 'posts'%}">Posts</a>
+                <a class="href_button_posts" href="{% url 'posts'%}">Posts</a>
                 <div class="small_logo"></div>
-                <a class="href_button" href="{% url 'subscriptions'%}">Abonnements</a>
+                <a class="href_button_subscriptions" href="{% url 'subscriptions'%}">Abonnements</a>
                 <div class="picture2"></div>
-                <a class="href_button" href="{% url 'logout'%}">Se déconnecter</a>
+                <a class="href_button_logout" href="{% url 'logout'%}">Se déconnecter</a>
         </nav>
         <div class="pseudo">
             <p>{{ request.user }}</p>
