@@ -7,7 +7,7 @@ fieldset{
 .rectangle4,
 .rectangle5{
     width: 1000px;
-    height: 620px;
+
     display: block;
     margin: auto;
     margin-top: 30px;
@@ -28,7 +28,6 @@ fieldset{
 
 .rectangle1{
     width: 1000px;
-    height: 850px;
     display: block;
     margin: auto;
     margin-top: 30px;
@@ -39,10 +38,10 @@ fieldset{
 
 .rectangle2{
     width: 700px;
-    height: 600px;
     display: block;
     margin: auto;
     margin-top: 30px;
+    margin-bottom: 30px;
     border: 2px solid #1C1E20;
 
 }
@@ -78,6 +77,7 @@ fieldset{
     width: 200px;
     height: 40px;
     margin-left: 750px;
+    margin-bottom: 10px;
     font-size: 20px;
     color: #FFFFFF;
     border: 2px solid #E8E6E3;
@@ -102,13 +102,60 @@ h2{
     margin-left: 10px;
 }
 
-p{
+img{
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+
+
+.description,
+.user_date,
+.body{
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 
 }
 
-img{
-    margin-left: 10px;
+.star {
+    width: 200px;
+    height: 30px;
+    display: block;
+    margin: auto;
+    margin-right: 800px;
+    background-size: cover;
+    background-image: url(backgrounds/New_Rating4.png);
+}
+
+.star-5{
+    background-position: 0px 226px;
+
+}
+
+.star-4{
+    background-position: 0px 187px;
+
+}
+
+.star-3{
+    background-position: 0px 149px;
+
+}
+
+.star-2{
+    background-position: 0px 110px;
+
+}
+
+.star-1{
+    background-position: 0px 72px;
+
+}
+
+.star-0{
+    background-position: 0px 39px;
+
 }
