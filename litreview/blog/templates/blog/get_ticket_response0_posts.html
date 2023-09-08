@@ -1,7 +1,7 @@
 <div class="rectangle5">
 	<p class="user_date">{{ entry.user.username }} a demandé une critique le {{entry.date_created }}</p>
 	<h2>{{ entry.title }}</h2>
-	<p>{{ entry.description }}</p>
+	<p class="description">{{ entry.description }}</p>
 	<img alt="{{ entry.title }}" src="{{ entry.photo.image.url }}">
 	<a class="button1" href="{% url 'review_in_response' entry.id %}">Modifier</a>
 	<a class="button2" href="{% url 'review_in_response' entry.id %}">Supprimer</a>
