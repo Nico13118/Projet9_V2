@@ -190,3 +190,13 @@ img{
     background-position: 0px 39px;
 
 }
+
+.href_button_posts{
+    border: 2px solid #F00020 !important;
+
+}
+
+.href_button_posts:hover{
+color: #61C64D !important;
+    border: 2px solid #61C64D !important;
+}
