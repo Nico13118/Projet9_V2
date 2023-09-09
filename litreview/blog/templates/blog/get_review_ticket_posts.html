@@ -34,6 +34,6 @@
 		<p class="description">{{ entry.ticket.description }}</p>
 		<img alt="{{ entry.ticket.title }}" src="{{ entry.ticket.photo.image.url }}">
 	</div>
-	<a class="button1" href="{% url 'review_in_response' entry.id %}">Modifier</a>
+	<a class="button1" href="{% url 'edit_review_in_response' entry.id %}">Modifier</a>
 	<a class="button2" href="{% url 'review_in_response' entry.id %}">Supprimer</a>
 </div>
