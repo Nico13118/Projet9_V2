@@ -179,6 +179,43 @@ def review_in_response(request, ticket_id):
     }
     return render(request, 'blog/review_in_response.html', context=context3)
 
+@login_required
+def edit_review_in_response(request, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    edit_review_form = forms.ReviewForm(instance=review)
+    tickets = models.Ticket.objects.all()
+    for ticket in tickets:
+        if ticket.id == review.ticket_id:
+            ticket_id = ticket.id
+            print("ticket id :", ticket_id)
+            print("review_id :", review_id)
+            ticket = get_object_or_404(models.Ticket, id=ticket_id)
+            edit_ticket_form = forms.TicketForm(instance=ticket)
+            if request.method == 'POST':
+                edit_review_form = forms.ReviewForm(request.POST, instance=review)
+                edit_ticket_form = forms.TicketForm(request.POST, instance=ticket)
+                edit_ticket_form.save()
+                if edit_review_form.is_valid():
+                    review = edit_review_form.save(commit=False)
+                    review.user = request.user
+                    review.ticket = ticket
+                    select_rating = request.POST.getlist('rating')
+                    if select_rating:
+                        review.rating = int(select_rating[0])
+                        review.save()
+                        return redirect('posts')
+                    else:
+                        review.rating = 0
+                        review.save()
+                        return redirect('posts')
+            context4 = {
+                'edit_review_form': edit_review_form,
+                'edit_ticket_form': edit_ticket_form,
+                'ticket': ticket,
+                'review': review,
+            }
+            return render(request, 'blog/edit_review_in_response.html', context=context4)
+
 
 # blog\views.py
 @login_required
