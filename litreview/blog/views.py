@@ -66,23 +66,17 @@ def posts(request):
     user_connected = str(request.user)
 
     for ticket in tickets:
-        if ticket.response == '0':
-            if ticket.user.username == user_connected:
-                ticket.entry_type = "Ticket_Not_Response"
-
-        if ticket.response == '1':
-            if ticket.user.username == user_connected:
-                ticket.entry_type = "Ticket_Response"
-
-        if ticket.response == '1':
+        if ticket.user.username == user_connected:
+            ticket.entry_type = "Ticket_Response"
             for review in reviews:
-                if review.ticket_id == ticket.id:
-                    if ticket.user.username == user_connected:
-                        review.entry_type = "Review"
-                        ticket.entry_type = "Ticket_Response"
-                    if review.user.username == user_connected:
-                        review.entry_type = "Review"
-                        ticket.entry_type = "Ticket_Response"
+                if review.user.username == user_connected:
+                    if review.ticket_id == ticket.id:
+                        if review.user.username == user_connected:
+                            review.entry_type = "Review"
+                            ticket.entry_type = "Ticket_Response"
+                if ticket.user.username == user_connected:
+                    review.entry_type = "Review"
+                    ticket.entry_type = "Ticket_Response"
 
     entries = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
     return render(request, 'blog/posts.html', context={'entries': entries})
