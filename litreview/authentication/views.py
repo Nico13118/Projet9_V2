@@ -15,7 +15,8 @@ def signup_page(request):
     if request.method == 'POST':
         form = forms.SignupForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.save()
             # auto-login user
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
