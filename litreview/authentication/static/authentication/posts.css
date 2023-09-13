@@ -2,32 +2,12 @@ h1{
     text-align: center;
 
 }
+
 fieldset{
     display: block;
     margin-top: 20px;
     border: 2px solid #1C1E20;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.rectangle4,
-.rectangle5{
-    width: 1000px;
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-    border: 2px solid #1C1E20;
-
-}
-
-
-.rectangle3{
-    width: 1000px;
-    height: 620px;
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-    border: 2px solid #1C1E20;
-
 }
 
 .rectangle1{
@@ -49,54 +29,45 @@ fieldset{
     border: 2px solid #1C1E20;
 
 }
-.critical_button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.rectangle3{
+    width: 1000px;
+    height: 620px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    border: 2px solid #1C1E20;
 
 }
 
-.request_button,
-.create_button{
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    height: 40px;
-    margin-right: 5px;
-    margin-left: 5px;
+.rectangle4,
+.rectangle5{
+    width: 1000px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    border: 2px solid #1C1E20;
+
+}
+
+.rectangle6{
+    width: 1000px;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 2px solid #1C1E20;
+
+}
+
+.rectangle7{
+    width: 700px;
+    display: block;
+    margin: auto;
     margin-top: 10px;
-    font-size: 20px;
-    color: #FFFFFF;
-    border: 2px solid #E8E6E3;
-    border-radius: 100px;
-    justify-content: center;
-    align-items: center;
-    background: #1C1E20;
-    text-decoration: none;
-}
-
-.create_button2{
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    height: 40px;
-    margin-left: 750px;
-    font-size: 20px;
-    color: #FFFFFF;
-    border: 2px solid #E8E6E3;
-    border-radius: 100px;
-    justify-content: center;
-    align-items: center;
-    background: #1C1E20;
-    text-decoration: none;
-
-}
-
-.create_button2:hover,
-.request_button:hover,
-.create_button:hover{
-    color: #61C64D;
-    border: 2px solid #61C64D;
+    margin-bottom: 30px;
+    border: 2px solid #1C1E20;
 }
 
 h2{
@@ -104,6 +75,7 @@ h2{
     font-family: Arial, Helvetica, sans-serif;
     margin-left: 10px;
 }
+
 .description,
 .user_date,
 .body{
@@ -121,11 +93,8 @@ img{
      margin-bottom: 30px;
 }
 
-
-
-.button1,
-.button2{
-    display: inline-flex;
+.button{
+display: inline-flex;
     width: 150px;
     height: 40px;
     font-size: 20px;
@@ -140,15 +109,30 @@ img{
     margin-bottom: 10px;
 }
 
-.button1{
-    margin-left: 625px;
+.button1_rectangle2{
+    margin-left: 651px;
     margin-right: 10px;
 
 }
-.button1:hover,
-.button2:hover{
+
+.del{
+    margin-left: 811px;
+}
+
+.button:hover,
+.button:hover{
     color: #61C64D;
     border: 2px solid #61C64D;
+}
+
+.href_button_posts:hover{
+    color: #61C64D !important;
+    border: 2px solid #61C64D !important;
+}
+
+.href_button_posts{
+    border: 2px solid #F00020 !important;
+
 }
 
 .star {
@@ -189,14 +173,4 @@ img{
 .star-0{
     background-position: 0px 39px;
 
-}
-
-.href_button_posts{
-    border: 2px solid #F00020 !important;
-
-}
-
-.href_button_posts:hover{
-color: #61C64D !important;
-    border: 2px solid #61C64D !important;
 }
