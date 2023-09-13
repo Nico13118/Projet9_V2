@@ -16,11 +16,11 @@
         <fieldset>
             {% for entry in entries %}
             {% if entry.entry_type == "Ticket_Not_Response"%}
-            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_ticket_response0_flow.html'%}
+            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_ticket_not_response_flow.html'%}
             {% endif %}
 
             {% if entry.entry_type == "Ticket_Response"%}
-            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_ticket_response1_flow.html'%}
+            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_ticket_response_flow.html'%}
             {% endif %}
 
             {% if entry.entry_type == "Review"%}
