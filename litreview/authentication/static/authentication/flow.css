@@ -4,28 +4,6 @@ fieldset{
     border: 2px solid #1C1E20;
 }
 
-.rectangle4,
-.rectangle5{
-    width: 1000px;
-
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-    border: 2px solid #1C1E20;
-
-}
-
-
-.rectangle3{
-    width: 1000px;
-    height: 620px;
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-    border: 2px solid #1C1E20;
-
-}
-
 .rectangle1{
     width: 1000px;
     display: block;
@@ -45,6 +23,18 @@ fieldset{
     border: 2px solid #1C1E20;
 
 }
+
+.rectangle3,
+.rectangle4{
+    width: 1000px;
+
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    border: 2px solid #1C1E20;
+
+}
+
 .critical_button{
     display: flex;
     justify-content: center;
@@ -120,7 +110,17 @@ img{
 
 }
 
-.star {
+.href_button_flow{
+    border: 2px solid #F00020 !important;
+
+}
+
+.href_button_flow:hover{
+color: #61C64D !important;
+    border: 2px solid #61C64D !important;
+}
+
+.star{
     width: 200px;
     height: 30px;
     display: block;
@@ -160,12 +160,3 @@ img{
 
 }
 
-.href_button_flow{
-    border: 2px solid #F00020 !important;
-
-}
-
-.href_button_flow:hover{
-color: #61C64D !important;
-    border: 2px solid #61C64D !important;
-}
