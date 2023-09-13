@@ -1,84 +1,102 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . import forms, models
 from django.contrib.auth.decorators import login_required
-from django.db.models import CharField, Value
 from itertools import chain
 
 
 @login_required
-def home(request):
-    reviews = models.Review.objects.all()
-    tickets_reviews = models.Review.objects.all()
-
-    return render(request, 'blog/flow.html', context={'tickets_reviews': tickets_reviews})
-
-
-@login_required
 def flow(request):
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
-    my_following = request.user.following.all()
-    user_connected = str(request.user)
+    tickets_user = models.Ticket.objects.filter(user=request.user)
+    tickets_user_follow = models.Ticket.objects.filter(user__in=request.user.following.all())
+    reviews_user = models.Review.objects.filter(user=request.user)
+    reviews_user_follow = models.Review.objects.filter(user__in=request.user.following.all())
 
-    for ticket in tickets:
+    for ticket_user_follow in tickets_user_follow:
 
-        if ticket.response == '0':
-            if ticket.user.username == user_connected:
-                ticket.entry_type = "Ticket_Not_Response"
-            if ticket.user.username != user_connected:
-                for follow in my_following:
-                    follow = str(follow)
-                    if ticket.user.username == follow:
-                        ticket.entry_type = "Ticket_Not_Response"
-        if ticket.response == '1':
-            if ticket.user.username == user_connected:
-                ticket.entry_type = "Ticket_Response"
-            for follow in my_following:
-                follow = str(follow)
-                if ticket.user.username == follow:
-                    ticket.content_type = "Ticket_Response"
+        """ Affiche le ticket de mes following avec réponse """
+        if ticket_user_follow.response == '1':
+            ticket_user_follow.entry_type = "Ticket_Response"
 
-        if ticket.response == '1':
-            for review in reviews:
-                if review.ticket_id == ticket.id:
-                    if ticket.user.username == user_connected:
-                        review.entry_type = "Review"
-                        ticket.entry_type = "Ticket_Response"
+            for review_user in reviews_user:
 
-                    for follow in my_following:
-                        follow = str(follow)
-                        if ticket.user.username == follow:
-                            review.entry_type = "Review"
-                            ticket.entry_type = "Ticket_Response"
+                """Affiche la review de l'utilisateur connecté et le ticket des mes following """
+                if review_user.ticket_id == ticket_user_follow.id:
+                    review_user.entry_type = "Review"
 
-                        if review.user.username == follow:
-                            review.entry_type = "Review"
-                            ticket.entry_type = "Ticket_Response"
+            for review_user_follow in reviews_user_follow:
+                for ticket_user in tickets_user:
 
-    entries = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
+                    """ Affiche la review et ticket de mes following """
+                    if review_user_follow.ticket_id == ticket_user_follow.id:
+                        review_user_follow.entry_type = "Review"
+
+                    """Affiche la review de mes following et le ticket de l'utilisateur connecté """
+                    if review_user_follow.ticket_id == ticket_user.id:
+                        review_user_follow.entry_type = "Review"
+
+        """ Affiche le ticket (sans réponse) de mes following """
+        if ticket_user_follow.response == '0':
+            ticket_user_follow.entry_type = "Ticket_Not_Response"
+
+    for ticket_user in tickets_user:
+
+        """ Affiche le ticket (sans réponse) de l'utilisateur connecté """
+        if ticket_user.response == '0':
+            ticket_user.entry_type = "Ticket_Not_Response"
+
+        """ Affiche le ticket (avec réponse) de l'utilisateur connecté """
+        if ticket_user.response == '1':
+            ticket_user.entry_type = "Ticket_Response"
+            for review_user in reviews_user:
+
+                """ Affiche la review et ticket de l'utilisateur connecté """
+                if review_user.ticket_id == ticket_user.id:
+                    review_user.entry_type = "Review"
+
+    entries = sorted(chain(tickets_user, tickets_user_follow, reviews_user, reviews_user_follow),
+                     key=lambda x: x.date_created, reverse=True)
     return render(request, 'blog/flow.html', context={'entries': entries})
 
 
 @login_required
 def posts(request):
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
-    user_connected = str(request.user)
+    tickets_user = models.Ticket.objects.filter(user=request.user)
+    tickets_user_follow = models.Ticket.objects.filter(user__in=request.user.following.all())
+    reviews_user = models.Review.objects.filter(user=request.user)
+    reviews_user_follow = models.Review.objects.filter(user__in=request.user.following.all())
 
-    for ticket in tickets:
-        if ticket.user.username == user_connected:
-            ticket.entry_type = "Ticket_Response"
-            for review in reviews:
-                if review.user.username == user_connected:
-                    if review.ticket_id == ticket.id:
-                        if review.user.username == user_connected:
-                            review.entry_type = "Review"
-                            ticket.entry_type = "Ticket_Response"
-                if ticket.user.username == user_connected:
-                    review.entry_type = "Review"
-                    ticket.entry_type = "Ticket_Response"
+    for ticket_user_follow in tickets_user_follow:
+        if ticket_user_follow.response == '1':
+            for review_user in reviews_user:
 
-    entries = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
+                """Affiche la review de l'utilisateur connecté et le ticket de mes following"""
+                if review_user.ticket_id == ticket_user_follow.id:
+                    review_user.entry_type = "Review_User_Ticket_Follow"
+
+            for review_user_follow in reviews_user_follow:
+                for ticket_user in tickets_user:
+
+                    """Affiche la review de mes following et le ticket de l'utilisateur connecté"""
+                    if review_user_follow.ticket_id == ticket_user.id:
+                        review_user_follow.entry_type = "Review_Follow_Ticket_User"
+
+    for ticket_user in tickets_user:
+
+        """ Affiche le ticket ( avec réponse ) de l'utilisateur connecté """
+        if ticket_user.response == '1':
+            ticket_user.entry_type = "Ticket_User_Response"
+            for review_user in reviews_user:
+
+                """ Affiche la review et ticket de l'utilisateur connecté """
+                if review_user.ticket_id == ticket_user.id:
+                    review_user.entry_type = "Review_User_Ticket_User"
+
+        """ Affiche le ticket ( sans réponse ) de l'utilisateur connecté """
+        if ticket_user.response == '0':
+            ticket_user.entry_type = "Ticket_User_Not_Response"
+
+    entries = sorted(chain(tickets_user, tickets_user_follow, reviews_user, reviews_user_follow),
+                     key=lambda x: x.date_created, reverse=True)
     return render(request, 'blog/posts.html', context={'entries': entries})
 
 
@@ -173,6 +191,7 @@ def review_in_response(request, ticket_id):
     }
     return render(request, 'blog/review_in_response.html', context=context3)
 
+
 @login_required
 def edit_review_in_response(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
@@ -214,23 +233,24 @@ def edit_review_in_response(request, review_id):
 # blog\views.py
 @login_required
 def follow_users(request):
-    # form  = Récupère la liste des utilisateurs inscrits
+
+    """ Récupère la liste des utilisateurs inscrits"""
     form = forms.FollowUsersForm(instance=request.user)
 
-    # del_following = Récupère la liste de mes abonnements depuis la classe DeleteFollowingForm
+    """ Récupère la liste de mes abonnements depuis la classe DeleteFollowingForm"""
     del_following = forms.DeleteFollowingForm(user=request.user)
 
-    # my_following = Récupère la liste de mes abonnements
+    """ Récupère la liste de mes abonnements"""
     my_following = request.user.following.all()
 
-    # my_followers = Récupère la liste des personnes qui me suivent
+    """ Récupère la liste des personnes qui me suivent"""
     my_followers = request.user.follower.all()
 
-    # fonctionnalité qui permet d'exclure de la liste, l'utilisateur connecté
+    """ Fonctionnalité qui permet d'exclure de la liste, l'utilisateur connecté"""
     form.fields['following'].queryset = form.fields['following'].queryset.exclude(
         username=request.user.username)
 
-    # fonctionnalité qui permet de ne pas afficher dans la 'Liste des utilisateurs' mes abonnements
+    """ Fonctionnalité qui permet de ne pas afficher dans la 'Liste des utilisateurs' mes abonnements"""
     form.fields['following'].queryset = form.fields['following'].queryset.exclude(
         id__in=my_following)
 
@@ -239,7 +259,7 @@ def follow_users(request):
             form = forms.FollowUsersForm(request.POST, instance=request.user)
             if form.is_valid():
                 user = form.save(commit=False)
-                # following_user > Récupère l'utilisateur qui a été selectionné dans la liste
+                """ Récupère l'utilisateur qui a été selectionné dans la liste"""
                 following_user = form.cleaned_data.get('following')
                 user.save()
                 user.following.add(*following_user)
