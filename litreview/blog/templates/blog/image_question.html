@@ -1,0 +1,27 @@
+<!-- image_question.html -->
+{% extends 'base2.html' %}
+{% load static %}
+{% block head %}
+        <meta charset="UTF-8">
+        <title>Posts - LITReview.com</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/image_question.css' %}"/>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <h1>Modifier votre ticket</h1>
+
+    <form method="post">{% csrf_token %}
+        <div class="rectangle1">
+            <h2>Souhaitez-vous modifier cette image ?</h2>
+            <img alt="{{ ticket.title }}" src="{{ ticket.photo.image.url }}">
+            <nav>
+            <a class="button button_yes" href="{% url 'edit_ticket_not_response' ticket.id %}">Oui</a>
+            <a class="button button_no" href="{% url 'edit_ticket_not_response1' ticket.id %}">Non</a>
+            </nav>
+
+        </div>
+
+    </form>
+
+    {% endif %}
+{% endblock %}
