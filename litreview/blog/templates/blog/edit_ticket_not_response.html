@@ -1,0 +1,34 @@
+<!-- edit_ticket_not_response.html -->
+{% extends 'base2.html' %}
+{% load static %}
+{% block head %}
+        <meta charset="UTF-8">
+        <title>Modifier votre ticket - LITReview.com</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'authentication/edit_ticket_not_response.css' %}"/>
+{% endblock %}
+{% block content %}
+        {% if user.is_authenticated %}
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                <h1>Modifier votre ticket</h1>
+                <div class="rectangle1">
+                        <p>
+                                <label for="id_title">Titre</label>
+                        </p>
+                        <div>
+                                <input type="text" name="title" value="{{ ticket.title }}" required id="id_title">
+                        </div>
+                        <p>
+                                <label for="id_description">Description</label>
+                        </p>
+
+                        <textarea name="description" maxlength="5000" required id="id_description" rows="4" cols="50">{{ ticket.description }}</textarea>
+                        <p>
+                                <label for="id_image">Image</label>
+                                <input type="file" name="image" accept="image/*" required id="id_image">
+                        </p>
+                        <button type="submit">Envoyer</button>
+                        <a class="button_cancel" href="{% url 'posts' %}">Annuler</a>
+                </div>
+        </form>
+        {% endif %}
+{% endblock %}
