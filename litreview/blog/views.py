@@ -200,8 +200,6 @@ def edit_review_in_response(request, review_id):
     for ticket in tickets:
         if ticket.id == review.ticket_id:
             ticket_id = ticket.id
-            print("ticket id :", ticket_id)
-            print("review_id :", review_id)
             ticket = get_object_or_404(models.Ticket, id=ticket_id)
             edit_ticket_form = forms.TicketForm(instance=ticket)
             if request.method == 'POST':
@@ -228,6 +226,60 @@ def edit_review_in_response(request, review_id):
                 'review': review,
             }
             return render(request, 'blog/edit_review_in_response.html', context=context4)
+
+
+@login_required
+def image_question(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+
+    return render(request, 'blog/image_question.html', context={'ticket': ticket})
+
+
+@login_required
+def edit_ticket_not_response1(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    photo_form = forms.PhotoForm()
+    edit_ticket_form = forms.TicketForm(instance=ticket)
+    if request.method == 'POST':
+        edit_ticket_form = forms.TicketForm(request.POST, instance=ticket)
+        photo_form = forms.PhotoForm(request.POST, request.FILES)
+        if edit_ticket_form.is_valid():
+            ticket.save()
+            return redirect('posts')
+
+    context5 = {
+        'edit_ticket_form': edit_ticket_form,
+        'ticket': ticket,
+        'photo_form': photo_form,
+    }
+    return render(request, 'blog/edit_ticket_not_response1.html', context=context5)
+
+
+@login_required
+def edit_ticket_not_response(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    photo_form = forms.PhotoForm()
+    edit_ticket_form = forms.TicketForm(instance=ticket)
+    if request.method == 'POST':
+        edit_ticket_form = forms.TicketForm(request.POST, instance=ticket)
+        photo_form = forms.PhotoForm(request.POST, request.FILES)
+        if edit_ticket_form.is_valid():
+            ticket = edit_ticket_form.save(commit=False)
+            ticket.user = request.user
+            if photo_form:
+                photo = photo_form.save(commit=False)
+                photo.uploader = request.user
+                photo.save()
+                ticket.photo = photo
+                ticket.save()
+                return redirect('posts')
+
+    context5 = {
+        'edit_ticket_form': edit_ticket_form,
+        'ticket': ticket,
+        'photo_form': photo_form,
+    }
+    return render(request, 'blog/edit_ticket_not_response.html', context=context5)
 
 
 # blog\views.py
