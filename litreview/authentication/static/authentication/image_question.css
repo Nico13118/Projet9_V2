@@ -1,0 +1,56 @@
+h1,
+h2{
+    text-align: center;
+}
+
+.rectangle1{
+    width: 500px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 2px solid #1C1E20;
+
+}
+
+img{
+    margin-left: 151.5px;
+
+}
+
+.button{
+    display: inline-flex;
+    width: 150px;
+    height: 40px;
+    font-size: 20px;
+    border: 2px solid #E8E6E3;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    background: #1C1E20;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.button_yes{
+    margin-right: 10px;
+    margin-left: 90px;
+
+}
+
+.button:hover{
+    color: #61C64D;
+    border: 2px solid #61C64D;
+}
+
+.href_button_posts{
+    border: 2px solid #F00020 !important;
+
+}
+
+.href_button_posts:hover{
+    color: #61C64D !important;
+    border: 2px solid #61C64D !important;
+}
