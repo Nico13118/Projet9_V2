@@ -3,5 +3,5 @@
 	<h2>{{ entry.title }}</h2>
 	<p class="description">{{ entry.description }}</p>
 	<img alt="{{ entry.title }}" src="{{ entry.photo.image.url }}">
-	<a class="button del button2_rectangle2" href="{% url 'review_in_response' entry.id %}">Supprimer</a>
+	<a class="button del button2_rectangle2" href="{% url 'ticket_delete' entry.id %}">Supprimer</a>
 </div>
