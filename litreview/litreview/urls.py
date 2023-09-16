@@ -35,6 +35,7 @@ urlpatterns = [
     path('edit_ticket_not_response1/<int:ticket_id>', blog.views.edit_ticket_not_response1,
          name='edit_ticket_not_response1'),
     path('ticket_delete/<int:ticket_id>', blog.views.ticket_delete, name='ticket_delete'),
+    path('review_delete/<int:review_id>', blog.views.review_delete, name='review_delete'),
     path('image_question/<int:ticket_id>', blog.views.image_question, name='image_question'),
     path('posts/', blog.views.posts, name='posts'),
     path('subscriptions/', blog.views.follow_users, name='subscriptions'),
