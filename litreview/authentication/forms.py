@@ -15,7 +15,6 @@ class SignupForm(UserCreationForm):
     def clean_password2(self):
         cleaned_data = super().clean()
         password1 = cleaned_data.get('password1')
-        password2 = cleaned_data.get('password2')
 
         validator1 = ContainsLetterValidator()
         validator1.validate(password1)
@@ -23,6 +22,7 @@ class SignupForm(UserCreationForm):
         validator2 = ContainsNumberValidator()
         validator2.validate(password1)
 
+        password2 = cleaned_data.get('password2')
         validator3 = Password1Password2()
         validator3.validate(password1, password2)
 
@@ -57,4 +57,3 @@ class CustomSetPasswordForm(SetPasswordForm):
 
         validator3 = Password1Password2()
         validator3.validate(new_password1, new_password2)
-
