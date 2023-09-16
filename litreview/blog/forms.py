@@ -47,4 +47,3 @@ class DeleteFollowingForm(forms.Form):
         super().__init__(*args)
         if user is not None:
             self.fields['following_to_delete'].queryset = user.following.all()
-
