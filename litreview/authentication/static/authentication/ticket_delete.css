@@ -1,0 +1,100 @@
+h1{
+    text-align: center;
+
+}
+
+h2{
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+}
+
+h3,
+h4{
+    color: #F00020;
+    font-size: 20px;
+    margin-left: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+}
+.description{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+img{
+    margin-left: 10px;
+    margin-bottom: 20px;
+    width: 180px;
+}
+
+.rectangle1{
+    width: 1000px;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #1C1E20;
+
+}
+
+.rectangle2{
+    background-color: #1C1E20;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #1C1E20;
+
+}
+
+.button_cancel,
+button{
+display: inline-flex;
+    width: 150px;
+    height: 40px;
+    font-size: 20px;
+    border: 2px solid #E8E6E3;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    background: #1C1E20;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.button_cancel{
+    font-size: 21px;
+    width: 146px;
+    height: 36px;
+    margin-left: 10px;
+
+}
+button{
+    margin-left: 333px;
+}
+
+.button_cancel:hover,
+button:hover{
+    color: #61C64D;
+    border: 2px solid #61C64D;
+}
+
+.href_button_posts:hover{
+    color: #61C64D !important;
+    border: 2px solid #61C64D !important;
+}
+
+.href_button_posts{
+    border: 2px solid #F00020 !important;
+
+}
