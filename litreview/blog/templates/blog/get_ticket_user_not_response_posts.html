@@ -4,5 +4,5 @@
 	<p class="description">{{ entry.description }}</p>
 	<img alt="{{ entry.title }}" src="{{ entry.photo.image.url }}">
 	<a class="button button1_rectangle2" href="{% url 'image_question' entry.id %}">Modifier</a>
-	<a class="button button2_rectangle2" href="{% url 'review_in_response' entry.id %}">Supprimer</a>
+	<a class="button button2_rectangle2" href="{% url 'ticket_delete' entry.id %}">Supprimer</a>
 </div>
