@@ -234,6 +234,7 @@ def image_question(request, ticket_id):
 
     return render(request, 'blog/image_question.html', context={'ticket': ticket})
 
+
 @login_required
 def ticket_delete(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
@@ -246,6 +247,23 @@ def ticket_delete(request, ticket_id):
         'ticket': ticket,
     }
     return render(request, 'blog/ticket_delete.html', context=context6)
+
+
+@login_required
+def review_delete(request, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    ticket_id = review.ticket_id
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    if request.method == 'POST':
+        if review:
+            ticket.response = 0
+            ticket.save()
+            review.delete()
+            return redirect('posts')
+    context7 = {
+        'review': review,
+    }
+    return render(request, 'blog/review_delete.html', context=context7)
 
 
 @login_required
