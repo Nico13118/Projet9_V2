@@ -234,6 +234,19 @@ def image_question(request, ticket_id):
 
     return render(request, 'blog/image_question.html', context={'ticket': ticket})
 
+@login_required
+def ticket_delete(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    if request.method == 'POST':
+        if ticket:
+            ticket.delete()
+            return redirect('posts')
+
+    context6 = {
+        'ticket': ticket,
+    }
+    return render(request, 'blog/ticket_delete.html', context=context6)
+
 
 @login_required
 def edit_ticket_not_response1(request, ticket_id):
