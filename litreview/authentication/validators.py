@@ -25,5 +25,5 @@ class Password1Password2:
         if password1 != password2:
             raise ValidationError('Les mots de passe ne sont pas identiques !', code='passwords_not_identical')
 
-    def get_help_texte(self):
+    def get_help_text(self):
         return 'Mots de passe '
