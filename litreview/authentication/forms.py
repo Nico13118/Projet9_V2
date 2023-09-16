@@ -42,7 +42,8 @@ class CustomPasswordResetForm(PasswordResetForm):
 
 class CustomSetPasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Nouveau mot de passe'}))
-    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirmer le nouveau mot de passe'}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput(
+        attrs={'placeholder': 'Confirmer le nouveau mot de passe'}))
 
     def clean_new_password2(self):
         cleaned_data = super().clean()
