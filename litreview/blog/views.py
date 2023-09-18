@@ -10,6 +10,7 @@ def flow(request):
     tickets_user_follow = models.Ticket.objects.filter(user__in=request.user.following.all())
     reviews_user = models.Review.objects.filter(user=request.user)
     reviews_user_follow = models.Review.objects.filter(user__in=request.user.following.all())
+    reviews_follower = models.Review.objects.filter(user__in=request.user.follower.all())
 
     for ticket_user_follow in tickets_user_follow:
 
@@ -53,7 +54,12 @@ def flow(request):
                 if review_user.ticket_id == ticket_user.id:
                     review_user.entry_type = "Review"
 
-    entries = sorted(chain(tickets_user, tickets_user_follow, reviews_user, reviews_user_follow),
+            for review_follower in reviews_follower:
+                """ Affiche la review de mes followers du ticket de l'utilisateur connecté"""
+                if review_follower.ticket_id == ticket_user.id:
+                    review_follower.entry_type = "Review"
+
+    entries = sorted(chain(tickets_user, tickets_user_follow, reviews_user, reviews_user_follow, reviews_follower),
                      key=lambda x: x.date_created, reverse=True)
     return render(request, 'blog/flow.html', context={'entries': entries})
 
