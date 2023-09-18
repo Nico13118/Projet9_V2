@@ -18,19 +18,19 @@
             {% endif %}
 
             {% if entry.entry_type == "Ticket_User_Not_Response"%}
-            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_ticket_user_not_response_posts.html'%}
+            {% include 'get_ticket_user_not_response_posts.html'%}
             {% endif %}
 
             {% if entry.entry_type == "Review_User_Ticket_Follow"%}
-            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_review_user_ticket_follow_posts.html'%}
+            {% include 'get_review_user_ticket_follow_posts.html'%}
             {% endif %}
 
             {% if entry.entry_type == "Review_Follow_Ticket_User"%}
-            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_review_follow_ticket_user_posts.html'%}
+            {% include 'get_review_follow_ticket_user_posts.html'%}
             {% endif %}
 
             {% if entry.entry_type == "Review_User_Ticket_User"%}
-            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_review_user_ticket_user_posts.html'%}
+            {% include 'get_review_user_ticket_user_posts.html'%}
             {% endif %}
             {% endfor %}
         </fieldset>
