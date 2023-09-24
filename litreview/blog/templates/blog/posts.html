@@ -14,7 +14,7 @@
             <h1>Vos Posts</h1>
             {% for entry in entries %}
             {% if entry.entry_type == "Ticket_User_Response"%}
-            {% include 'C:\Projet9_V2\litreview\blog\templates\blog\get_ticket_user_response_posts.html'%}
+            {% include 'get_ticket_user_response_posts.html'%}
             {% endif %}
 
             {% if entry.entry_type == "Ticket_User_Not_Response"%}
