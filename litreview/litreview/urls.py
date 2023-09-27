@@ -23,6 +23,7 @@ import blog.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # urls.py
     path("login/", authentication.views.LoginPageView.as_view(), name='login'),
     path('logout/', authentication.views.logout_user, name='logout'),
     path('flow/', blog.views.flow, name='flow'),
@@ -41,7 +42,7 @@ urlpatterns = [
     path('posts/', blog.views.posts, name='posts'),
     path('subscriptions/', blog.views.follow_users, name='subscriptions'),
     path('create_ticket/', blog.views.create_ticket, name='create_ticket'),
-    path('signup/', authentication.views.signup_page, name='signup'),
+    path('signup/', authentication.views.SignUpPage.as_view(), name='signup'),
     path('success/', authentication.views.registration_success, name='success'),
     path('password_reset_form/', authentication.views.CustomPasswordResetView.as_view(), name='password_reset_form'),
     path('password_reset_email/', authentication.views.CustomPasswordResetView.as_view(), name='password_reset_email'),
