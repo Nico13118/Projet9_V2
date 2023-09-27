@@ -40,8 +40,8 @@ def logout_user(request):
     return redirect('login')
 
 
+# views.py
 class LoginPageView(View):
-    template_name = 'authentication/login.html'
     form_class = forms.LoginForm
 
     def get(self, request):
@@ -59,7 +59,7 @@ class LoginPageView(View):
                 login(request, user)
                 return redirect('flow')
         message = 'Identifiant ou mot de passe invalide !!'
-        return render(request, self.template_name, context={'form': form, 'message': message})
+        return render(request, 'authentication/login.html', context={'form': form, 'message': message})
 
 
 class CustomPasswordResetView(PasswordResetView):
