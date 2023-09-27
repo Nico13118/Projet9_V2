@@ -10,17 +10,22 @@ from .forms import CustomPasswordResetForm, CustomSetPasswordForm
 from django.contrib.auth.views import PasswordResetConfirmView
 
 
-def signup_page(request):
-    form = forms.SignupForm()
-    if request.method == 'POST':
-        form = forms.SignupForm(request.POST)
+class SignUpPage(View):
+    form_class = forms.SignupForm
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, 'authentication/signup.html', context={'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
             # auto-login user
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
-    return render(request, 'authentication/signup.html', context={'form': form})
+        return render(request, 'authentication/signup.html', context={'form': form})
 
 
 def registration_success(request):
