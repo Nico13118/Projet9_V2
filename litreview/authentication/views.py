@@ -22,9 +22,8 @@ class SignUpPage(View):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            # auto-login user
             login(request, user)
-            return redirect(settings.LOGIN_REDIRECT_URL)
+            return redirect('success')
         return render(request, 'authentication/signup.html', context={'form': form})
 
 
