@@ -20,9 +20,7 @@ class SignUpPage(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
-            login(request, user)
+            form.save()
             return redirect('success')
         return render(request, 'authentication/signup.html', context={'form': form})
 
