@@ -7,8 +7,15 @@ from django.contrib.auth.views import PasswordResetForm
 
 
 class SignupForm(UserCreationForm):
-    username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Pseudo'}))
-    email = forms.CharField(max_length=150, widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    username = forms.CharField(max_length=150,widget=forms.TextInput(attrs={'placeholder': 'Pseudo'}),
+                               error_messages={
+                                   'unique': "Ce nom d'utilisateur est déjà utilisé. Veuillez en choisir un autre."})
+
+    email = forms.CharField(max_length=150, widget=forms.EmailInput(attrs={'placeholder': 'Email'}),
+                            error_messages={
+                                'unique':
+                                    "Cet email existe déjà dans notre base de données."})
+
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirmer le mot de passe'}))
 
@@ -31,6 +38,7 @@ class SignupForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
+# forms.py
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Pseudo'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe'}))
