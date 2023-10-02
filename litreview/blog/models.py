@@ -13,7 +13,7 @@ class Photo(models.Model):
 # Créer un ticket (Demander une critique)
 class Ticket(models.Model):
     objects = models.Manager()
-    photo = models.ForeignKey(Photo, null=True, on_delete=models.SET_NULL, blank=True)
+    photo = models.ForeignKey(Photo, null=True, on_delete=models.CASCADE, blank=True)
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=8192, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
