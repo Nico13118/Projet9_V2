@@ -246,6 +246,7 @@ def ticket_delete(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     if request.method == 'POST':
         if ticket:
+            ticket.photo.delete()
             ticket.delete()
             return redirect('posts')
 
