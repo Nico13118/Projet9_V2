@@ -18,4 +18,3 @@ class Password1Password2:
     def validate(self, password1, password2, user=None):
         if password1 != password2:
             raise ValidationError('Les mots de passe ne sont pas identiques !', code='passwords_not_identical')
-
